@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Амфи-Дент | Клиника эстетической и цифровой стоматологии премиум-класса</title>
+    <meta name="description" content="Архитектура естественной улыбки в Ставрополе. Основана в 2007 году. 18 лет практики. Собственный 3D-КТ, зубосохраняющая микрохирургия на ул. Мира, 236.">
+    
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dentist",
+      "name": "Стоматологическая клиника «Амфи-Дент»",
+      "image": "https://amfi-dent.ru/logo.png",
+      "@id": "https://amfi-dent.ru",
+      "url": "https://amfi-dent.ru",
+      "telephone": "+78652244200",
+      "priceRange": "$$$",
+      "founder": {
+        "@type": "Person",
+        "name": "Основатели клиники Амфи-Дент"
+      },
+      "foundingDate": "2007",
+      "medicalSpecialty": [
+        "Dentistry",
+        "Implantology",
+        "Orthodontics",
+        "Endodontics",
+        "Pediatric Dentistry"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Мира, 236",
+        "addressLocality": "Ставрополь",
+        "postalCode": "355017",
+        "addressCountry": "RU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.0428,
+        "longitude": 41.9734
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "215",
+        "bestRating": "5.0",
+        "worstRating": "1.0"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "21:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday", "Sunday"],
+          "opens": "10:00",
+          "closes": "19:00"
+        }
+      ],
+      "sameAs": [
+        "https://wa.me/79614543370",
+        "https://yandex.ru/maps/-/CXuEZMp2",
+        "https://t.me/amfident",
+        "https://vk.com/amfident",
+        "https://ok.ru/amfident"
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- TODO: migrate to local bundle for production -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind Configuration (Quiet Luxury Palette) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        aurum: {
+                            base: '#FBFBF9',
+                            dark: '#1C1B1A',
+                            accent: '#A89F91',
+                            border: 'rgba(229, 231, 235, 0.8)'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    transitionTimingFunction: {
+                        'elegant': 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #FBFBF9;
+            color: #1C1B1A;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .premium-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(28, 27, 26, 0.15);
+            padding: 0.75rem 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 300;
+            color: #1C1B1A;
+            transition: border-color 0.4s ease;
+            border-radius: 0;
+        }
+        .premium-input:focus { outline: none; border-bottom-color: #A89F91; }
+        .premium-input::placeholder { color: #A89F91; }
+        select.premium-input { appearance: none; cursor: pointer; }
+
+        .chip-radio { display: none; }
+        .chip-label {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(28, 27, 26, 0.15);
+            color: #78716c;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .chip-radio:checked + .chip-label {
+            border-color: #1C1B1A;
+            color: #1C1B1A;
+            background-color: rgba(28, 27, 26, 0.03);
+        }
+
+        /* Before/After Slider */
+        .slider-container { position: relative; width: 100%; height: 450px; overflow: hidden; }
+        @media (min-width: 768px) { .slider-container { height: 600px; } }
+        .slider-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .slider-after { clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
+        .slider-input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; z-index: 10; }
+        .slider-line {
+            position: absolute; top: 0; left: 50%; width: 1px; height: 100%;
+            background-color: rgba(255, 255, 255, 0.9); transform: translateX(-50%); pointer-events: none; z-index: 5;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .slider-handle {
+            width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Accordion */
+        .accordion-content { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.5s ease, opacity 0.5s ease; }
+
+        /* Modal */
+        .modal-overlay { opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { transform: scale(0.95) translateY(10px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FBFBF9; }
+        ::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 0; }
+        ::-webkit-scrollbar-thumb:hover { background: #A89F91; }
+        
+        .map-filter { filter: grayscale(100%) contrast(95%); }
+    </style>
+</head>
+<body class="font-sans antialiased text-stone-900 bg-aurum-base selection:bg-aurum-accent selection:text-white relative pb-24 md:pb-0">
+
+    <!-- Mobile Sticky Action Bar -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-[100] bg-[#FBFBF9]/95 backdrop-blur-md border-t border-stone-200/80 px-4 py-3 flex gap-3 shadow-[0_-4px_15px_rgba(0,0,0,0.05)]">
+        <a href="https://wa.me/79614543370" target="_blank" rel="noopener" class="flex items-center justify-center px-4 py-3 border border-stone-300 text-stone-900 hover:bg-stone-100 transition-colors" aria-label="Написать в WhatsApp">
+            <i data-lucide="message-circle" class="w-5 h-5 stroke-[1.5]" aria-hidden="true"></i>
+        </a>
+        <a href="#concierge" class="flex-1 flex items-center justify-center bg-stone-900 text-white text-[11px] font-semibold uppercase tracking-widest hover:bg-stone-800 transition-colors text-center">
+            Назначить визит
+        </a>
+    </div>
+
+    <!-- Mobile Fullscreen Menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-aurum-base z-[110] transform translate-x-full transition-transform duration-500 ease-elegant flex flex-col px-6 py-8" aria-hidden="true">
+        <div class="flex justify-between items-center mb-12">
+            <span class="text-2xl font-serif tracking-wide text-aurum-dark uppercase leading-none">
+                Amphi<span class="font-light italic text-aurum-accent lowercase">-Dent</span>
+            </span>
+            <button id="closeMenuBtn" class="text-stone-900 p-2 -mr-2" aria-label="Закрыть меню"><i data-lucide="x" class="w-8 h-8 stroke-[1]" aria-hidden="true"></i></button>
+        </div>
+        
+        <div class="flex flex-col gap-6 text-xl font-serif overflow-y-auto pb-6">
+            <a href="#philosophy" class="mobile-link text-stone-900 hover:text-aurum-accent transition-colors">Философия</a>
+            <a href="#diagnostics" class="mobile-link text-stone-900 hover:text-aurum-accent transition-colors">Диагностика</a>
+            <a href="#expertise" class="mobile-link text-stone-900 hover:text-aurum-accent transition-colors">Направления</a>
+            <a href="#cases" class="mobile-link text-stone-900 hover:text-aurum-accent transition-colors">До / После</a>
+            <a href="#team" class="mobile-link text-stone-900 hover:text-aurum-accent transition-colors">Врачи</a>
+            <a href="#protocol" class="mobile-link text-stone-900 hover:text-aurum-accent transition-colors">Первый визит</a>
+            <a href="#faq" class="mobile-link text-stone-900 hover:text-aurum-accent transition-colors">FAQ</a>
+            <a href="#location" class="mobile-link text-stone-900 hover:text-aurum-accent transition-colors">Контакты</a>
+        </div>
+        
+        <div class="mt-auto border-t border-aurum-border pt-6 space-y-3">
+            <a href="tel:+78652244200" class="block font-light text-stone-600 text-lg">+7 (8652) 244-200</a>
+            <a href="https://wa.me/79614543370" target="_blank" rel="noopener" class="block font-light text-aurum-accent text-lg">WhatsApp: +7 961 454-33-70</a>
+        </div>
+    </div>
+
+    <!-- Top Info Bar -->
+    <div class="w-full bg-aurum-dark text-aurum-base py-2.5 px-6 flex flex-col sm:flex-row justify-between items-center text-[10px] tracking-[0.2em] uppercase font-light gap-3 z-[90] relative">
+        <span class="text-center sm:text-left text-stone-300">Приватный прием по записи · Выделенная парковка на ул. Мира, 236</span>
+        <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-stone-300">
+            <span class="hidden md:inline-block">Пн–Пт: 09:00–21:00 | Сб–Вс: 10:00–19:00</span>
+            <div class="flex items-center gap-4 sm:border-l sm:border-stone-600 sm:pl-4">
+                <a href="tel:+78652244200" class="hover:text-white transition-colors">+7 (8652) 244-200</a>
+                <a href="https://wa.me/79614543370" target="_blank" rel="noopener" class="hover:text-white transition-colors flex items-center gap-1">
+                    <i data-lucide="message-circle" class="w-3 h-3" aria-hidden="true"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 w-full bg-aurum-base/90 backdrop-blur-md z-[80] border-b border-aurum-border transition-all duration-300 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
+            <a href="#" class="flex flex-col">
+                <span class="text-3xl font-serif tracking-wide text-aurum-dark uppercase leading-none">
+                    Amphi<span class="font-light italic text-aurum-accent lowercase text-2xl">-Dent</span>
+                </span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden xl:flex items-center gap-6 text-[11px] tracking-[0.1em] uppercase font-medium text-stone-600">
+                <a href="#philosophy" class="hover:text-aurum-accent transition-colors duration-300">Философия</a>
+                <a href="#diagnostics" class="hover:text-aurum-accent transition-colors duration-300">Диагностика</a>
+                <a href="#expertise" class="hover:text-aurum-accent transition-colors duration-300">Направления</a>
+                <a href="#cases" class="hover:text-aurum-accent transition-colors duration-300">До/После</a>
+                <a href="#team" class="hover:text-aurum-accent transition-colors duration-300">Врачи</a>
+                <a href="#protocol" class="hover:text-aurum-accent transition-colors duration-300">Первый визит</a>
+                <a href="#faq" class="hover:text-aurum-accent transition-colors duration-300">FAQ</a>
+                <a href="#location" class="hover:text-aurum-accent transition-colors duration-300">Контакты</a>
+            </div>
+
+            <div class="hidden md:block">
+                <a href="#concierge" class="group relative px-6 py-3 border border-aurum-dark text-xs uppercase tracking-widest overflow-hidden block">
+                    <span class="relative z-10 transition-colors duration-300 group-hover:text-aurum-base">Назначить визит</span>
+                    <div class="absolute inset-0 bg-aurum-dark transform scale-x-0 origin-left transition-transform duration-500 ease-elegant group-hover:scale-x-100"></div>
+                </a>
+            </div>
+
+            <button id="openMenuBtn" class="xl:hidden text-aurum-dark p-2 -mr-2" aria-label="Открыть меню">
+                <i data-lucide="menu" class="w-6 h-6 stroke-[1.5]" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative w-full min-h-[85vh] flex items-center border-b border-aurum-border overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-16 lg:py-0">
+            
+            <div class="lg:col-span-6 space-y-10 z-10">
+                <div class="space-y-6">
+                    <h1 class="text-5xl md:text-6xl lg:text-[4.5rem] font-serif leading-[1.05] tracking-tight text-stone-900">
+                        Архитектура естественной улыбки. <br>
+                        <span class="text-aurum-accent font-light italic">В тишине, точности и комфорте.</span>
+                    </h1>
+                    <p class="text-lg md:text-xl font-light text-stone-600 max-w-lg leading-relaxed">
+                        Собственный центр 3D-КТ, зубосохраняющая микроинвазивная медицина и швейцарские стандарты на ул. Мира, 236.
+                    </p>
+                    
+                    <!-- Metrics -->
+                    <ul class="space-y-4 pt-6 border-t border-aurum-border max-w-md">
+                        <li class="flex items-center gap-4 text-sm font-light text-stone-700">
+                            <span class="w-1.5 h-1.5 rounded-full bg-aurum-accent shrink-0"></span>
+                            Основана в 2007 году · 18+ лет клинической безупречности
+                        </li>
+                        <li class="flex items-center gap-4 text-sm font-light text-stone-700">
+                            <span class="w-1.5 h-1.5 rounded-full bg-aurum-accent shrink-0"></span>
+                            Более 16 130 сохраненных улыбок в Ставрополе
+                        </li>
+                    </ul>
+
+                    <!-- Consultation Box -->
+                    <div class="bg-white border border-stone-200 p-5 mt-6 max-w-md shadow-sm">
+                        <p class="text-[13px] font-medium text-stone-900 mb-1">Первичная консультация эксперта с 3D-диагностикой: 1 500 ₽</p>
+                        <p class="text-xs text-stone-500">(засчитывается в стоимость последующего лечения)</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-2">
+                    <a href="#concierge" class="bg-aurum-dark text-aurum-base px-8 py-4 text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors duration-300 w-full sm:w-auto text-center shadow-md">
+                        Назначить визит
+                    </a>
+                </div>
+            </div>
+
+            <!-- Image -->
+            <div class="lg:col-span-6 relative h-[50vh] lg:h-[85vh] w-full mt-8 lg:mt-0 right-0">
+                <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&q=80&w=1200" width="1200" height="800" alt="Интерьер лобби клиники Амфи-Дент" class="absolute inset-0 w-full h-full object-cover object-left grayscale-[15%]" />
+                <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-aurum-base to-transparent hidden lg:block"></div>
+                <div class="absolute inset-0 bg-aurum-base/5"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Clinic Real Metrics Bar -->
+    <section class="border-b border-aurum-border bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-aurum-border">
+                <div class="py-10 flex flex-col items-center text-center px-4 hover:bg-stone-50 transition-colors">
+                    <span class="text-5xl font-serif text-stone-900 mb-2">18</span>
+                    <span class="text-[10px] font-sans uppercase tracking-widest text-stone-500">лет клинической практики</span>
+                </div>
+                <div class="py-10 flex flex-col items-center text-center px-4 hover:bg-stone-50 transition-colors">
+                    <span class="text-5xl font-serif text-stone-900 mb-2">16 130<span class="text-aurum-accent font-light">+</span></span>
+                    <span class="text-[10px] font-sans uppercase tracking-widest text-stone-500">благодарных пациентов</span>
+                </div>
+                <div class="py-10 flex flex-col items-center text-center px-4 hover:bg-stone-50 transition-colors">
+                    <span class="text-5xl font-serif text-stone-900 mb-2">215</span>
+                    <span class="text-[10px] font-sans uppercase tracking-widest text-stone-500">дипломов и сертификатов</span>
+                </div>
+                <div class="py-10 flex flex-col items-center text-center px-4 hover:bg-stone-50 transition-colors">
+                    <span class="text-5xl font-serif text-stone-900 mb-2">9</span>
+                    <span class="text-[10px] font-sans uppercase tracking-widest text-stone-500">ведущих врачей-экспертов</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners / Standards Bar -->
+    <section class="border-b border-aurum-border bg-aurum-base py-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-center text-[11px] uppercase tracking-widest text-stone-400 mb-8 max-w-2xl mx-auto">
+                Мы работаем исключительно по международным клиническим протоколам с оригинальными сертифицированными биосовместимыми материалами.
+            </p>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 items-center opacity-60">
+                <span class="font-serif text-xl tracking-wide text-stone-600">Nobel Biocare <span class="text-xs text-stone-400 font-sans tracking-normal block text-center">Швейцария</span></span>
+                <span class="font-serif text-xl tracking-wide text-stone-600">Ivoclar / IPS e.max <span class="text-xs text-stone-400 font-sans tracking-normal block text-center">Лихтенштейн</span></span>
+                <span class="font-serif text-xl tracking-wide text-stone-600">KaVo Dental <span class="text-xs text-stone-400 font-sans tracking-normal block text-center">Германия</span></span>
+                <span class="font-serif text-xl tracking-wide text-stone-600">Alpha-Bio Tec <span class="text-xs text-stone-400 font-sans tracking-normal block text-center">Израиль</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section id="philosophy" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 md:mb-24 flex flex-col items-center text-center">
+                <span class="text-xs uppercase tracking-widest text-aurum-accent mb-4 block">Философия клиники</span>
+                <h2 class="text-4xl md:text-5xl font-serif max-w-2xl text-stone-900">Медицина, сберегающая вашу природу</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+                <div class="space-y-6">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full border border-aurum-accent/30 text-aurum-accent">
+                        <span class="font-serif text-xl italic">01</span>
+                    </div>
+                    <h3 class="text-xl font-serif text-stone-900">Презумпция сохранения зуба</h3>
+                    <p class="font-light text-stone-600 leading-relaxed text-sm">
+                        Борьба за каждый миллиметр живой ткани. Мы беремся за спасение сложных зубов от удаления, восстанавливая их функциональность и эстетику.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full border border-aurum-accent/30 text-aurum-accent">
+                        <span class="font-serif text-xl italic">02</span>
+                    </div>
+                    <h3 class="text-xl font-serif text-stone-900">Оптическая точность</h3>
+                    <p class="font-light text-stone-600 leading-relaxed text-sm">
+                        Применение многократного увеличения гарантирует абсолютную микроинвазивность. Лечение происходит строго в пределах пораженных тканей.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full border border-aurum-accent/30 text-aurum-accent">
+                        <span class="font-serif text-xl italic">03</span>
+                    </div>
+                    <h3 class="text-xl font-serif text-stone-900">Приватность и комфорт</h3>
+                    <p class="font-light text-stone-600 leading-relaxed text-sm">
+                        Персональный график без ожидания в коридорах. Идеальная тишина, тактичность персонала и атмосфера полного релакса на протяжении всего приема.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Бескомпромиссная безопасность (Изящный светлый блок) -->
+            <div class="mt-20 bg-stone-50 border border-stone-200/80 p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center gap-8 shadow-sm">
+                <div class="w-16 h-16 rounded-full border border-aurum-border flex items-center justify-center shrink-0">
+                    <i data-lucide="shield-check" class="w-8 h-8 text-aurum-accent" aria-hidden="true"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-serif mb-2 text-stone-900">Бескомпромиссная безопасность</h4>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed max-w-4xl">
+                        Многоступенчатая стерилизация класса B (Германия) и индивидуальный крафт-сет на каждого пациента. Мы гарантируем абсолютную инфекционную безопасность всех клинических процессов по международным протоколам.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- First Visit Protocol -->
+    <section id="protocol" class="py-24 md:py-32 bg-white border-t border-aurum-border">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-aurum-accent mb-4 block">Снятие неопределенности</span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-stone-900">Как проходит первый визит</h2>
+                </div>
+                <p class="font-light text-stone-500 max-w-sm text-sm md:text-right">4 этапа погружения в ваше здоровье в стиле премиального консьерж-сервиса.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 lg:gap-y-16">
+                <!-- 01 -->
+                <div class="border-t border-aurum-border pt-6">
+                    <div class="flex items-baseline gap-4 mb-4">
+                        <span class="text-2xl font-serif text-aurum-accent italic">01</span>
+                        <h3 class="text-xl font-serif text-stone-900">Приватный прием и чашка кофе</h3>
+                    </div>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed">Знакомство с персональным координатором, заполнение анкеты здоровья в атмосфере тишины без ожидания в общих коридорах.</p>
+                </div>
+                <!-- 02 -->
+                <div class="border-t border-aurum-border pt-6">
+                    <div class="flex items-baseline gap-4 mb-4">
+                        <span class="text-2xl font-serif text-aurum-accent italic">02</span>
+                        <h3 class="text-xl font-serif text-stone-900">Тотальная 3D-диагностика</h3>
+                    </div>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed">До 20 минут. Сканирование на собственном томографическом комплексе клиники и детальный фотопротокол исходного состояния.</p>
+                </div>
+                <!-- 03 -->
+                <div class="border-t border-aurum-border pt-6">
+                    <div class="flex items-baseline gap-4 mb-4">
+                        <span class="text-2xl font-serif text-aurum-accent italic">03</span>
+                        <h3 class="text-xl font-serif text-stone-900">Экспертный консилиум</h3>
+                    </div>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed">Детальный разбор клинической картины на большом экране. Выбор оптимального решения без навязывания лишних процедур.</p>
+                </div>
+                <!-- 04 -->
+                <div class="border-t border-aurum-border pt-6">
+                    <div class="flex items-baseline gap-4 mb-4">
+                        <span class="text-2xl font-serif text-aurum-accent italic">04</span>
+                        <h3 class="text-xl font-serif text-stone-900">Прозрачный финансовый план</h3>
+                    </div>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed">Фиксация точной сметы и сроков до начала лечения. Никаких скрытых платежей или внезапных увеличений бюджета.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diagnostics Hub -->
+    <section id="diagnostics" class="py-24 md:py-32 bg-stone-900 text-aurum-base relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 mix-blend-overlay" style="background-image: radial-gradient(circle at 50% 50%, #ffffff 1px, transparent 1px); background-size: 40px 40px;"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                
+                <div class="lg:col-span-5 space-y-8">
+                    <span class="text-xs uppercase tracking-widest text-aurum-accent block">Собственный рентген-центр</span>
+                    <h2 class="text-4xl md:text-5xl font-serif leading-tight">Точность до первого прикосновения</h2>
+                    <p class="font-light text-stone-400 text-sm leading-relaxed max-w-md">
+                        Первичная консультация с 3D-КТ — 1 500 ₽ (сумма засчитывается в дальнейшее лечение). Мы исключаем работу вслепую.
+                    </p>
+                    <div class="pt-6">
+                        <a href="#concierge" class="inline-block border border-aurum-accent text-aurum-accent hover:bg-aurum-accent hover:text-stone-900 transition-colors duration-300 px-6 py-3 text-xs uppercase tracking-widest">
+                            Пройти диагностику
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="p-8 border border-stone-700 bg-stone-800/30 backdrop-blur-sm hover:border-aurum-accent transition-colors duration-500 space-y-4">
+                        <i data-lucide="box" class="w-8 h-8 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                        <h4 class="text-xl font-serif text-white">Компьютерная томография (3D КТ)</h4>
+                        <p class="text-sm text-stone-400 font-light leading-relaxed">
+                            Детальное объемное исследование (16 протоколов). Обязательный стандарт для точного планирования.
+                        </p>
+                    </div>
+                    
+                    <div class="p-8 border border-stone-700 bg-stone-800/30 backdrop-blur-sm hover:border-aurum-accent transition-colors duration-500 space-y-4">
+                        <i data-lucide="scan-face" class="w-8 h-8 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                        <h4 class="text-xl font-serif text-white">Телерентгенограмма (ТРГ)</h4>
+                        <p class="text-sm text-stone-400 font-light leading-relaxed">
+                            Точнейший снимок черепа в боковой проекции. Основа цифровой ортодонтии для расчета перемещения зубов.
+                        </p>
+                    </div>
+
+                    <div class="sm:col-span-2 p-8 border border-stone-700 bg-stone-800/30 backdrop-blur-sm hover:border-aurum-accent transition-colors duration-500 flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                        <i data-lucide="radio" class="w-8 h-8 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                        <div>
+                            <h4 class="text-xl font-serif text-white mb-2">Цифровая визиография</h4>
+                            <p class="text-sm text-stone-400 font-light leading-relaxed max-w-xl">
+                                Прицельные снимки с ультранизкой лучевой нагрузкой. Позволяют контролировать ход лечения в режиме реального времени.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Grid (8 Items in Grid) -->
+    <section id="expertise" class="py-24 md:py-32 bg-stone-50 border-t border-aurum-border">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 md:mb-24 text-center max-w-2xl mx-auto">
+                <span class="text-xs uppercase tracking-widest text-aurum-accent mb-4 block">Направления экспертизы</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-stone-900 mb-4">Комплексная реабилитация</h2>
+                <p class="font-light text-stone-500 text-sm">Полный спектр премиальной стоматологии в едином цифровом протоколе.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- 1 -->
+                <div class="bg-white p-8 border border-aurum-border shadow-sm flex flex-col h-full hover:border-aurum-accent transition-colors duration-500 group">
+                    <h3 class="text-xl font-serif mb-4 text-stone-900 group-hover:text-aurum-accent transition-colors">Имплантология и хирургия</h3>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
+                        Ультразвуковой пьезотом KaVo для атравматичного удаления и костной пластики. Имплантация Nobel Biocare, Alpha-Bio Tec. Направленная костная регенерация.
+                    </p>
+                    <p class="text-[13px] font-semibold tracking-wide text-aurum-accent pt-6 border-t border-aurum-border">Инвестиция от 65 000 ₽ / ед.</p>
+                </div>
+
+                <!-- 2 -->
+                <div class="bg-white p-8 border border-aurum-border shadow-sm flex flex-col h-full hover:border-aurum-accent transition-colors duration-500 group">
+                    <h3 class="text-xl font-serif mb-4 text-stone-900 group-hover:text-aurum-accent transition-colors">Биоэстетика и микропротезирование</h3>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
+                        Цельнокерамические виниры IPS e.max, коронки из диоксида циркония. Цифровой дизайн улыбки (DSD), микрообточка от 0,2 мм под оптикой.
+                    </p>
+                    <p class="text-[13px] font-semibold tracking-wide text-aurum-accent pt-6 border-t border-aurum-border">Инвестиция от 38 000 ₽ / ед.</p>
+                </div>
+
+                <!-- 3 -->
+                <div class="bg-white p-8 border border-aurum-border shadow-sm flex flex-col h-full hover:border-aurum-accent transition-colors duration-500 group">
+                    <h3 class="text-xl font-serif mb-4 text-stone-900 group-hover:text-aurum-accent transition-colors">Цифровая ортодонтия</h3>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
+                        Комплексный расчет по ТРГ. Лингвальные брекет-системы STB, невидимые элайнеры, сплинты для расслабления ВНЧС.
+                    </p>
+                    <p class="text-[13px] font-semibold tracking-wide text-aurum-accent pt-6 border-t border-aurum-border">Инвестиция от 120 000 ₽ за курс</p>
+                </div>
+
+                <!-- 4 -->
+                <div class="bg-white p-8 border border-aurum-border shadow-sm flex flex-col h-full hover:border-aurum-accent transition-colors duration-500 group">
+                    <h3 class="text-xl font-serif mb-4 text-stone-900 group-hover:text-aurum-accent transition-colors">Комплексная пародонтология</h3>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
+                        Аппарат Vector (Германия), лазерная деконтаминация, озонотерапия HealOzone, микрохирургические лоскутные операции.
+                    </p>
+                    <p class="text-[13px] font-semibold tracking-wide text-aurum-accent pt-6 border-t border-aurum-border">Стоимость протокола от 6 500 ₽</p>
+                </div>
+
+                <!-- 5 -->
+                <div class="bg-white p-8 border border-aurum-border shadow-sm flex flex-col h-full hover:border-aurum-accent transition-colors duration-500 group">
+                    <h3 class="text-xl font-serif mb-4 text-stone-900 group-hover:text-aurum-accent transition-colors">Микроинвазивная терапия</h3>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
+                        Микроэндодонтия: лечение сложных каналов под микроскопом. Лазерная диагностика DIAGNOdent, художественная реставрация.
+                    </p>
+                    <p class="text-[13px] font-semibold tracking-wide text-aurum-accent pt-6 border-t border-aurum-border">Стоимость от 8 500 ₽</p>
+                </div>
+
+                <!-- 6 -->
+                <div class="bg-white p-8 border border-aurum-border shadow-sm flex flex-col h-full hover:border-aurum-accent transition-colors duration-500 group">
+                    <h3 class="text-xl font-serif mb-4 text-stone-900 group-hover:text-aurum-accent transition-colors">Деликатная детская стоматология</h3>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
+                        Адаптационный прием без слез. Лечение кариеса, профилактика очаговой деминерализации, герметизация фиссур.
+                    </p>
+                    <p class="text-[13px] font-semibold tracking-wide text-aurum-accent pt-6 border-t border-aurum-border">Прием от 3 500 ₽</p>
+                </div>
+
+                <!-- 7 (Wider card) -->
+                <div class="bg-white p-8 border border-aurum-border shadow-sm flex flex-col h-full hover:border-aurum-accent transition-colors duration-500 group md:col-span-2 lg:col-span-3 lg:w-2/3 lg:mx-auto">
+                    <h3 class="text-xl font-serif mb-4 text-stone-900 group-hover:text-aurum-accent transition-colors">Профессиональная гигиена и отбеливание</h3>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed mb-6 flex-grow">
+                        Швейцарский протокол Air-Flow Master, ультразвуковой Piezon Master. Глубокое фторирование и бережное отбеливание эмали.
+                    </p>
+                    <p class="text-[13px] font-semibold tracking-wide text-aurum-accent pt-6 border-t border-aurum-border">Инвестиция от 5 500 ₽</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctors Gallery (9 Experts) -->
+    <section id="team" class="py-24 md:py-32 bg-white border-t border-aurum-border">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 md:mb-24 text-center">
+                <span class="text-xs uppercase tracking-widest text-aurum-accent mb-4 block">Коллегия докторов</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-stone-900">Медицинская элита</h2>
+                <p class="font-light text-stone-500 max-w-xl mx-auto text-sm mt-6">
+                    Фундаментальный опыт и непрерывное международное образование. Нажмите на карточку врача для просмотра детального профиля.
+                </p>
+            </div>
+
+            <!-- 9 Cards Layout: 3x3 Grid on lg screens -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-12">
+                
+                <!-- 1 -->
+                <div class="group cursor-pointer flex flex-col" data-modal-target="barsukov">
+                    <div class="relative h-[350px] md:h-[400px] mb-5 overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800" width="800" height="1000" loading="lazy" alt="Барсуков П.В." class="w-full h-full object-cover object-top grayscale transition-transform duration-1000 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest shadow-sm">Профиль</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-serif text-stone-900 mb-1 leading-tight">Барсуков <br>Павел Валентинович</h3>
+                    <p class="text-sm font-light text-stone-600 mb-3 flex-grow">Ведущий хирург-имплантолог</p>
+                    <p class="text-[10px] tracking-widest text-aurum-accent uppercase border-t border-aurum-border pt-3">Стаж 29 лет</p>
+                </div>
+
+                <!-- 2 -->
+                <div class="group cursor-pointer flex flex-col" data-modal-target="ilnitsky">
+                    <div class="relative h-[350px] md:h-[400px] mb-5 overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1594824436998-d40d998064d1?auto=format&fit=crop&q=80&w=800" width="800" height="1000" loading="lazy" alt="Ильницкий Е.В." class="w-full h-full object-cover object-top grayscale transition-transform duration-1000 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest shadow-sm">Профиль</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-serif text-stone-900 mb-1 leading-tight">Ильницкий <br>Евгений Викторович</h3>
+                    <p class="text-sm font-light text-stone-600 mb-3 flex-grow">Стоматолог-терапевт высшей категории</p>
+                    <p class="text-[10px] tracking-widest text-aurum-accent uppercase border-t border-aurum-border pt-3">Эндодонтия</p>
+                </div>
+
+                <!-- 3 -->
+                <div class="group cursor-pointer flex flex-col" data-modal-target="silitskaya">
+                    <div class="relative h-[350px] md:h-[400px] mb-5 overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1527613426401-41d440ecec75?auto=format&fit=crop&q=80&w=800" width="800" height="1000" loading="lazy" alt="Силицкая В.А." class="w-full h-full object-cover object-top grayscale transition-transform duration-1000 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest shadow-sm">Профиль</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-serif text-stone-900 mb-1 leading-tight">Силицкая <br>Вероника Александровна</h3>
+                    <p class="text-sm font-light text-stone-600 mb-3 flex-grow">Стоматолог-терапевт</p>
+                    <p class="text-[10px] tracking-widest text-aurum-accent uppercase border-t border-aurum-border pt-3">Художественная реставрация</p>
+                </div>
+
+                <!-- 4 -->
+                <div class="group cursor-pointer flex flex-col" data-modal-target="tsokolova">
+                    <div class="relative h-[350px] md:h-[400px] mb-5 overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800" width="800" height="1000" loading="lazy" alt="Цоколова Л.А." class="w-full h-full object-cover object-top grayscale transition-transform duration-1000 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest shadow-sm">Профиль</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-serif text-stone-900 mb-1 leading-tight">Цоколова <br>Лариса Анатольевна</h3>
+                    <p class="text-sm font-light text-stone-600 mb-3 flex-grow">Стоматолог-хирург, детский стоматолог</p>
+                    <p class="text-[10px] tracking-widest text-aurum-accent uppercase border-t border-aurum-border pt-3">Стаж 36 лет</p>
+                </div>
+
+                <!-- 5 -->
+                <div class="group cursor-pointer flex flex-col" data-modal-target="sokolov">
+                    <div class="relative h-[350px] md:h-[400px] mb-5 overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=800" width="800" height="1000" loading="lazy" alt="Соколов А.Ю." class="w-full h-full object-cover object-top grayscale transition-transform duration-1000 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest shadow-sm">Профиль</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-serif text-stone-900 mb-1 leading-tight">Соколов <br>Алексей Юрьевич</h3>
+                    <p class="text-sm font-light text-stone-600 mb-3 flex-grow">Стоматолог-терапевт</p>
+                    <p class="text-[10px] tracking-widest text-aurum-accent uppercase border-t border-aurum-border pt-3">Стаж более 30 лет</p>
+                </div>
+
+                <!-- 6 -->
+                <div class="group cursor-pointer flex flex-col" data-modal-target="borzov">
+                    <div class="relative h-[350px] md:h-[400px] mb-5 overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800" width="800" height="1000" loading="lazy" alt="Борзов И.Ю." class="w-full h-full object-cover object-top grayscale transition-transform duration-1000 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest shadow-sm">Профиль</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-serif text-stone-900 mb-1 leading-tight">Борзов <br>Илья Юрьевич</h3>
+                    <p class="text-sm font-light text-stone-600 mb-3 flex-grow">Врач-стоматолог-ортодонт</p>
+                    <p class="text-[10px] tracking-widest text-aurum-accent uppercase border-t border-aurum-border pt-3">Стаж с 2011 года</p>
+                </div>
+
+                <!-- 7 -->
+                <div class="group cursor-pointer flex flex-col" data-modal-target="popova">
+                    <div class="relative h-[350px] md:h-[400px] mb-5 overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800" width="800" height="1000" loading="lazy" alt="Попова И.В." class="w-full h-full object-cover object-top grayscale transition-transform duration-1000 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest shadow-sm">Профиль</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-serif text-stone-900 mb-1 leading-tight">Попова <br>Ирина Васильевна</h3>
+                    <p class="text-sm font-light text-stone-600 mb-3 flex-grow">Стоматолог-терапевт</p>
+                    <p class="text-[10px] tracking-widest text-aurum-accent uppercase border-t border-aurum-border pt-3">Микроинвазивная терапия</p>
+                </div>
+
+                <!-- 8 -->
+                <div class="group cursor-pointer flex flex-col" data-modal-target="makatova">
+                    <div class="relative h-[350px] md:h-[400px] mb-5 overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1590611936760-eeb9bc500b67?auto=format&fit=crop&q=80&w=800" width="800" height="1000" loading="lazy" alt="Макатова Ж.С." class="w-full h-full object-cover object-top grayscale transition-transform duration-1000 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest shadow-sm">Профиль</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-serif text-stone-900 mb-1 leading-tight">Макатова <br>Жанна Сейфединовна</h3>
+                    <p class="text-sm font-light text-stone-600 mb-3 flex-grow">Стоматолог-терапевт</p>
+                    <p class="text-[10px] tracking-widest text-aurum-accent uppercase border-t border-aurum-border pt-3">Превентивная терапия</p>
+                </div>
+
+                <!-- 9 -->
+                <div class="group cursor-pointer flex flex-col" data-modal-target="kalashnikova">
+                    <div class="relative h-[350px] md:h-[400px] mb-5 overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800" width="800" height="1000" loading="lazy" alt="Калашникова Н.И." class="w-full h-full object-cover object-top grayscale transition-transform duration-1000 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/10 transition-colors flex items-center justify-center">
+                            <span class="bg-white/90 text-stone-900 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] uppercase tracking-widest shadow-sm">Профиль</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg font-serif text-stone-900 mb-1 leading-tight">Калашникова <br>Наталья Ивановна</h3>
+                    <p class="text-sm font-light text-stone-600 mb-3 flex-grow">Врач-стоматолог детский</p>
+                    <p class="text-[10px] tracking-widest text-aurum-accent uppercase border-t border-aurum-border pt-3">Детский прием</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctor Modal Template -->
+    <div id="doctorModal" class="modal-overlay fixed inset-0 z-[200] bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="modal-content relative bg-aurum-base w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col border border-stone-200">
+            <button id="closeDoctorModal" class="absolute top-4 right-4 text-stone-500 hover:text-stone-900 transition-colors z-10 bg-white/50 rounded-full p-1" aria-label="Закрыть">
+                <i data-lucide="x" class="w-6 h-6 stroke-[1.5]" aria-hidden="true"></i>
+            </button>
+            <div class="p-8 md:p-12">
+                <span id="modalDocExp" class="text-[10px] font-semibold uppercase tracking-widest text-aurum-accent mb-4 block"></span>
+                <h3 id="modalDocName" class="text-3xl md:text-4xl font-serif text-stone-900 mb-2 leading-tight"></h3>
+                <p id="modalDocRole" class="font-light text-stone-500 text-sm mb-8 pb-8 border-b border-aurum-border"></p>
+                <div id="modalDocDesc" class="space-y-6 font-light text-stone-600 text-sm leading-relaxed"></div>
+                <div class="mt-10 pt-8 border-t border-aurum-border text-center md:text-left">
+                    <button onclick="document.getElementById('closeDoctorModal').click(); document.getElementById('concierge').scrollIntoView({behavior: 'smooth'})" class="inline-block bg-stone-900 text-white text-[11px] uppercase tracking-widest hover:bg-stone-800 transition-colors px-10 py-4 shadow-md">
+                        Назначить визит к врачу
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clinical Case (Before / After) -->
+    <section id="cases" class="py-24 md:py-32 bg-stone-100/50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-widest text-aurum-accent mb-4 block">Клиническая эстетика</span>
+                <h2 class="text-4xl font-serif text-stone-900">Искусство невидимого вмешательства</h2>
+                <p class="font-light text-stone-500 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
+                    Тотальная реабилитация. Наслаивание керамики с точным повторением градиента, микрорельефа и природной светопроницаемости живого зуба.
+                </p>
+            </div>
+
+            <div class="max-w-5xl mx-auto relative shadow-2xl rounded-sm overflow-hidden bg-stone-200">
+                <div class="slider-container">
+                    <img src="https://images.unsplash.com/photo-1590625692027-31df0a87a2d1?auto=format&fit=crop&q=80&w=1200" width="1200" height="600" loading="lazy" alt="До реабилитации" class="slider-image grayscale-[30%] opacity-90 sepia-[10%]" />
+                    <img src="https://images.unsplash.com/photo-1606214174585-fd31238caaa5?auto=format&fit=crop&q=80&w=1200" width="1200" height="600" loading="lazy" alt="После реабилитации" class="slider-image slider-after" id="sliderAfter" />
+                    
+                    <div class="slider-line" id="sliderLine">
+                        <div class="slider-handle">
+                            <i data-lucide="chevrons-left-right" class="w-4 h-4" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <input type="range" min="0" max="100" value="50" class="slider-input" id="sliderInput" aria-label="Сравнение до и после">
+                </div>
+            </div>
+            
+            <div class="max-w-5xl mx-auto flex justify-between text-[10px] md:text-xs tracking-widest uppercase text-stone-400 mt-6 px-2 mb-12">
+                <span>До реставрации</span>
+                <span>После (Ультратонкая керамика)</span>
+            </div>
+
+            <!-- Parameters Plaque -->
+            <div class="max-w-5xl mx-auto p-6 md:p-10 bg-white border border-aurum-border shadow-sm">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6 md:gap-y-8 text-sm font-light text-stone-600">
+                    <div class="lg:col-span-1">
+                        <span class="block text-[10px] font-semibold uppercase tracking-widest text-stone-400 mb-1.5">Протокол</span>
+                        Тотальная реабилитация прикуса винирами E-max (12 единиц).
+                    </div>
+                    <div>
+                        <span class="block text-[10px] font-semibold uppercase tracking-widest text-stone-400 mb-1.5">Срок реализации</span>
+                        14 дней (3 персональных визита).
+                    </div>
+                    <div>
+                        <span class="block text-[10px] font-semibold uppercase tracking-widest text-stone-400 mb-1.5">Ведущие эксперты</span>
+                        Ильницкий Е.В. (терапия)<br>Борзов И.Ю. (ортопедия)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patient Reviews & Rating -->
+    <section id="reviews" class="py-24 bg-stone-50 border-t border-aurum-border relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="mb-16 text-center">
+                <span class="text-xs uppercase tracking-widest text-aurum-accent mb-4 block">Репутация доверия</span>
+                <h2 class="text-4xl font-serif text-stone-900 mb-10">Искусство спасения улыбок</h2>
+                
+                <!-- Rating Badge -->
+                <div class="inline-flex flex-col sm:flex-row items-center gap-4 bg-white border border-aurum-border px-8 py-4 rounded-full shadow-sm">
+                    <div class="flex items-center gap-1 text-aurum-accent">
+                        <i data-lucide="star" class="w-5 h-5 fill-current" aria-hidden="true"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" aria-hidden="true"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" aria-hidden="true"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" aria-hidden="true"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current" aria-hidden="true"></i>
+                    </div>
+                    <span class="text-stone-900 font-serif text-xl sm:border-l sm:border-stone-200 sm:pl-4">4.9 / 5.0 на Яндекс.Картах и ПроДокторов</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
+                <!-- Review 1 -->
+                <div class="relative space-y-6 pt-8 border-t border-aurum-border">
+                    <i data-lucide="quote" class="absolute top-0 left-0 w-8 h-8 text-aurum-accent opacity-20 stroke-[1]" aria-hidden="true"></i>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed relative z-10 italic">
+                        «Пришла с безнадежным зубом — в двух клиниках до этого отправляли на удаление. Вероника Александровна Силицкая провела ювелирную работу. Зуб спасен. Это не просто лечение, это магия. Огромная благодарность!»
+                    </p>
+                    <div>
+                        <p class="text-sm font-medium text-stone-900">Анна С.</p>
+                        <p class="text-xs text-aurum-accent mt-1">Врач: Силицкая В.А. (Терапия)</p>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="relative space-y-6 pt-8 border-t border-aurum-border">
+                    <i data-lucide="quote" class="absolute top-0 left-0 w-8 h-8 text-aurum-accent opacity-20 stroke-[1]" aria-hidden="true"></i>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed relative z-10 italic">
+                        «Удаление сложной ретинированной восьмерки у Павла Валентиновича Барсукова прошло абсолютно незаметно. Никакого отека на следующий день, боли и страха. Высочайший профессионализм хирурга.»
+                    </p>
+                    <div>
+                        <p class="text-sm font-medium text-stone-900">Михаил В.</p>
+                        <p class="text-xs text-aurum-accent mt-1">Врач: Барсуков П.В. (Хирургия)</p>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="relative space-y-6 pt-8 border-t border-aurum-border">
+                    <i data-lucide="quote" class="absolute top-0 left-0 w-8 h-8 text-aurum-accent opacity-20 stroke-[1]" aria-hidden="true"></i>
+                    <p class="font-light text-stone-600 text-sm leading-relaxed relative z-10 italic">
+                        «Проходим лечение у Борзова Ильи Юрьевича. Очень глубокий подход с расчетом сустава и осанки, а не просто брекеты на зубы. Результат на элайнерах виден уже через 3 месяца.»
+                    </p>
+                    <div>
+                        <p class="text-sm font-medium text-stone-900">Елена Т.</p>
+                        <p class="text-xs text-aurum-accent mt-1">Врач: Борзов И.Ю. (Ортодонтия)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantees -->
+    <section class="py-24 bg-stone-900 text-aurum-base border-t-4 border-aurum-accent">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 md:mb-20 text-center">
+                <span class="text-xs uppercase tracking-widest text-aurum-accent mb-4 block">Стандарты ответственности</span>
+                <h2 class="text-4xl md:text-5xl font-serif">Клинические гарантии</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="space-y-4 border-t border-stone-700 pt-6">
+                    <i data-lucide="shield" class="w-8 h-8 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                    <h3 class="text-lg font-serif">Пожизненная гарантия</h3>
+                    <p class="font-light text-stone-400 text-sm leading-relaxed">Пожизненная гарантия производителя на остеоинтеграцию имплантов премиум-класса Nobel Biocare.</p>
+                </div>
+                <div class="space-y-4 border-t border-stone-700 pt-6">
+                    <i data-lucide="file-text" class="w-8 h-8 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                    <h3 class="text-lg font-serif">Официальный договор</h3>
+                    <p class="font-light text-stone-400 text-sm leading-relaxed">Официальная гарантия по договору на ортопедические конструкции сроком до 5 лет.</p>
+                </div>
+                <div class="space-y-4 border-t border-stone-700 pt-6">
+                    <i data-lucide="activity" class="w-8 h-8 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                    <h3 class="text-lg font-serif">Стерильность Class-B</h3>
+                    <p class="font-light text-stone-400 text-sm leading-relaxed">Европейский стандарт стерилизации: многоступенчатая вакуумная обработка и индивидуальный крафт-сет на каждого пациента.</p>
+                </div>
+                <div class="space-y-4 border-t border-stone-700 pt-6">
+                    <i data-lucide="heart" class="w-8 h-8 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                    <h3 class="text-lg font-serif">Сервисная поддержка</h3>
+                    <p class="font-light text-stone-400 text-sm leading-relaxed">Бесплатные профилактические осмотры в течение первого года после завершения комплексного лечения.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 bg-white border-t border-aurum-border">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-widest text-aurum-accent mb-4 block">Частые вопросы</span>
+                <h2 class="text-4xl font-serif text-stone-900">Снятие неопределенности</h2>
+            </div>
+
+            <div class="space-y-2">
+                <div class="border-b border-aurum-border">
+                    <button class="faq-btn w-full text-left py-6 flex justify-between items-center focus:outline-none group">
+                        <span class="text-lg font-serif text-stone-900 group-hover:text-aurum-accent transition-colors">Что делать, если у меня сильный страх перед стоматологами (дентофобия)?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-aurum-accent shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="pb-6 font-light text-stone-600 text-sm leading-relaxed">
+                            Мы понимаем ваши чувства. В нашей клинике применяется адаптационный подход: мы не начинаем лечение сразу. Первый визит — это беседа и диагностика. Мы подробно объясняем каждый шаг, используем микроинвазивные методы без вибрации и шума, а также современные протоколы анестезии, гарантирующие полное отсутствие дискомфорта.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="border-b border-aurum-border">
+                    <button class="faq-btn w-full text-left py-6 flex justify-between items-center focus:outline-none group">
+                        <span class="text-lg font-serif text-stone-900 group-hover:text-aurum-accent transition-colors">Сколько времени занимает установка импланта и будет ли отек?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-aurum-accent shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="pb-6 font-light text-stone-600 text-sm leading-relaxed">
+                            Сама процедура установки одного импланта занимает около 20-30 минут. Благодаря использованию ультразвукового пьезотома KaVo и хирургических 3D-шаблонов, вмешательство проходит без классических разрезов скальпелем. Это сводит к минимуму травматизацию тканей, поэтому в 95% случаев послеоперационный отек и боли отсутствуют.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-b border-aurum-border">
+                    <button class="faq-btn w-full text-left py-6 flex justify-between items-center focus:outline-none group">
+                        <span class="text-lg font-serif text-stone-900 group-hover:text-aurum-accent transition-colors">Засчитывается ли стоимость консультации в дальнейшее лечение?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-aurum-accent shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="pb-6 font-light text-stone-600 text-sm leading-relaxed">
+                            Да. Первичная консультация эксперта, включающая 3D-КТ снимок и составление точного финансового плана, стоит 1 500 ₽. При согласии на план лечения эта сумма полностью вычитается из итоговой стоимости.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-b border-aurum-border">
+                    <button class="faq-btn w-full text-left py-6 flex justify-between items-center focus:outline-none group">
+                        <span class="text-lg font-serif text-stone-900 group-hover:text-aurum-accent transition-colors">Есть ли возможность безналичной оплаты и работы по ДМС?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-aurum-accent shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="pb-6 font-light text-stone-600 text-sm leading-relaxed">
+                            Да, мы принимаем любые банковские карты и работаем с полисами ДМС. Также мы предоставляем полный пакет документов для оформления налогового вычета. Для комплексных планов лечения предусмотрена прозрачная система поэтапной оплаты.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-b border-aurum-border">
+                    <button class="faq-btn w-full text-left py-6 flex justify-between items-center focus:outline-none group">
+                        <span class="text-lg font-serif text-stone-900 group-hover:text-aurum-accent transition-colors">Какие сроки ожидания приема?</span>
+                        <i data-lucide="plus" class="w-5 h-5 text-aurum-accent shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p class="pb-6 font-light text-stone-600 text-sm leading-relaxed">
+                            Обычно запись формируется на 2–3 дня вперед, что гарантирует каждому пациенту достаточное время на персональный прием без спешки в коридоре. Однако для пациентов с острой болью мы всегда находим резервные слоты в расписании.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location (Map) -->
+    <section id="location" class="py-24 bg-aurum-base border-t border-aurum-border">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 items-stretch bg-white border border-aurum-border shadow-sm">
+                
+                <div class="p-10 md:p-16 flex flex-col justify-center">
+                    <span class="text-xs uppercase tracking-widest text-aurum-accent mb-6 block">Ваш маршрут к нам</span>
+                    <a href="https://yandex.ru/maps/-/CXuEZMp2" target="_blank" rel="noopener" class="text-3xl md:text-4xl font-serif text-stone-900 mb-8 hover:text-aurum-accent transition-colors block">
+                        г. Ставрополь,<br>ул. Мира, 236
+                    </a>
+                    
+                    <div class="space-y-6 font-light text-sm text-stone-600 mb-10">
+                        <div class="bg-stone-50 border-l-2 border-aurum-accent p-4 flex items-start gap-3">
+                            <i data-lucide="star" class="w-5 h-5 text-aurum-accent shrink-0 fill-aurum-accent" aria-hidden="true"></i>
+                            <p class="text-xs font-light text-stone-600 leading-relaxed">Рейтинг клиники на Яндекс Картах 4.9 · Наличие выделенного закрытого паркинга со стороны ул. Мира</p>
+                        </div>
+                        <p class="flex items-center gap-4">
+                            <i data-lucide="phone" class="w-5 h-5 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                            <a href="tel:+78652244200" class="hover:text-stone-900 transition-colors">+7 (8652) 244-200</a>
+                        </p>
+                        <p class="flex items-center gap-4">
+                            <i data-lucide="message-circle" class="w-5 h-5 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                            <a href="https://wa.me/79614543370" target="_blank" rel="noopener" class="hover:text-stone-900 transition-colors">WhatsApp: +7 (961) 454-33-70</a>
+                        </p>
+                    </div>
+
+                    <a href="https://yandex.ru/maps/-/CXuEZMp2" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 border border-aurum-dark text-stone-900 hover:bg-aurum-dark hover:text-aurum-base transition-colors duration-300 px-6 py-4 text-xs uppercase tracking-widest self-start">
+                        <i data-lucide="navigation" class="w-4 h-4" aria-hidden="true"></i>
+                        Маршрут на ул. Мира, 236
+                    </a>
+                </div>
+                
+                <div class="relative h-[400px] lg:h-auto w-full bg-stone-200">
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A99dbaf3e449a5b3c5332f144d18ffae64860cc328ef7bdf35478d38a0a9b83b4&amp;source=constructor" width="100%" height="100%" frameborder="0" class="absolute inset-0 w-full h-full object-cover map-filter" title="Карта проезда к клинике Амфи-Дент"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concierge Service (Booking Form) -->
+    <section id="concierge" class="py-24 bg-white border-t border-aurum-border">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-xs uppercase tracking-widest text-aurum-accent block mb-4">Консьерж-сервис</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-stone-900 leading-tight">Запланируйте визит</h2>
+                <p class="font-light text-stone-500 text-sm leading-relaxed mt-4 max-w-lg mx-auto">
+                    Оставьте контактные данные, и мы свяжемся с вами для подбора идеального времени. <br>
+                    <span class="text-stone-900 font-medium block mt-2">Консультация с 3D-КТ — 1 500 ₽ (засчитывается в стоимость лечения).</span>
+                </p>
+            </div>
+
+            <div class="bg-aurum-base p-8 md:p-12 relative border border-aurum-border shadow-sm">
+                <!-- Success Message -->
+                <div id="successMessage" class="absolute inset-0 bg-white z-20 flex flex-col items-center justify-center text-center p-8 opacity-0 pointer-events-none transition-opacity duration-700">
+                    <div class="w-16 h-16 rounded-full border border-aurum-accent flex items-center justify-center mb-6 bg-aurum-base">
+                        <i data-lucide="check" class="w-8 h-8 text-aurum-accent stroke-[1.5]" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-3xl font-serif mb-4 text-stone-900">Запрос принят</h3>
+                    <p class="font-light text-stone-500 text-sm max-w-xs">Координатор клиники свяжется с вами в ближайшее время для подтверждения записи.</p>
+                </div>
+
+                <form id="bookingForm" class="space-y-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <input type="text" required placeholder="Ваше имя и фамилия" class="premium-input" aria-label="Имя">
+                        </div>
+                        <div>
+                            <input type="tel" id="phoneInput" required placeholder="Телефон (+7...)" class="premium-input" aria-label="Телефон">
+                        </div>
+                    </div>
+
+                    <!-- Service Select -->
+                    <div>
+                        <select required class="premium-input" aria-label="Направление лечения">
+                            <option value="" disabled selected hidden>Выберите направление</option>
+                            <option value="consultation">Первичная консультация и КТ</option>
+                            <option value="hygiene">Гигиена Air-Flow</option>
+                            <option value="implant">Имплантация</option>
+                            <option value="veneers">Виниры</option>
+                            <option value="ortho">Ортодонтия</option>
+                            <option value="therapy">Лечение зубов</option>
+                            <option value="kids">Детский прием</option>
+                        </select>
+                    </div>
+
+                    <!-- Time Selection -->
+                    <div class="space-y-5">
+                        <label class="block text-xs uppercase tracking-widest text-stone-400">Желаемый интервал визита</label>
+                        <div class="flex flex-wrap gap-3">
+                            <label>
+                                <input type="radio" name="time" value="morning" class="chip-radio" checked>
+                                <span class="chip-label">Утро (09:00 - 13:00)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="time" value="day" class="chip-radio">
+                                <span class="chip-label">День (13:00 - 17:00)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="time" value="evening" class="chip-radio">
+                                <span class="chip-label">Вечер (17:00 - 21:00)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Contact Preference -->
+                    <div class="space-y-5">
+                        <label class="block text-xs uppercase tracking-widest text-stone-400">Удобный способ связи</label>
+                        <div class="flex flex-wrap gap-3">
+                            <label>
+                                <input type="radio" name="contact" value="call" class="chip-radio" checked>
+                                <span class="chip-label">Звонок координатора</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="contact" value="whatsapp" class="chip-radio">
+                                <span class="chip-label">Сообщение в WhatsApp</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-stone-900 text-aurum-base py-5 text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors duration-300 mt-4 shadow-md">
+                        Назначить визит
+                    </button>
+                    <p class="text-center text-[10px] text-stone-400 mt-6 leading-relaxed">
+                        Нажимая на кнопку, вы подтверждаете согласие на обработку персональных данных.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-aurum-base pt-20 pb-10 border-t-4 border-aurum-accent relative z-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 border-b border-stone-800 pb-16 mb-10">
+            
+            <div class="lg:col-span-5">
+                <a href="#" class="block mb-6">
+                    <span class="text-3xl font-serif tracking-wide text-aurum-base uppercase leading-none">
+                        Amphi<span class="font-light italic text-aurum-accent lowercase text-2xl">-Dent</span>
+                    </span>
+                </a>
+                <p class="font-light text-stone-400 text-sm max-w-sm mb-8 leading-relaxed">
+                    Клиника эстетической и цифровой стоматологии премиум-класса. Искусство сохранения естественной улыбки. Основана в 2007 году.
+                </p>
+                
+                <div class="space-y-3 font-light text-sm text-stone-300">
+                    <p><a href="https://yandex.ru/maps/-/CXuEZMp2" target="_blank" rel="noopener" class="hover:text-aurum-accent transition-colors">г. Ставрополь, ул. Мира, 236</a></p>
+                    <p><a href="tel:+78652244200" class="hover:text-white transition-colors">+7 (8652) 244-200</a>, <a href="tel:+78652245200" class="hover:text-white transition-colors">+7 (8652) 245-200</a></p>
+                    <p class="text-aurum-accent"><a href="https://wa.me/79614543370" target="_blank" rel="noopener" class="hover:text-white transition-colors">WhatsApp: +7 (961) 454-33-70</a></p>
+                    <p>amfi-dent@mail.ru</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4">
+                <h4 class="text-xs uppercase tracking-widest text-aurum-accent mb-6">Режим работы</h4>
+                <ul class="space-y-4 font-light text-sm text-stone-400">
+                    <li class="flex justify-between border-b border-stone-800 pb-2">
+                        <span>Понедельник – Пятница</span>
+                        <span class="text-aurum-base">09:00 — 21:00</span>
+                    </li>
+                    <li class="flex justify-between border-b border-stone-800 pb-2">
+                        <span>Суббота – Воскресенье</span>
+                        <span class="text-aurum-base">10:00 — 19:00</span>
+                    </li>
+                    <li class="pt-2 italic text-xs text-stone-500">Прием осуществляется строго по предварительной записи.<br>Имеется закрытая парковка.</li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-3">
+                <h4 class="text-xs uppercase tracking-widest text-aurum-accent mb-6">Навигация</h4>
+                <ul class="space-y-3 font-light text-sm text-stone-400 mb-8">
+                    <li><a href="#philosophy" class="hover:text-aurum-accent transition-colors">Философия</a></li>
+                    <li><a href="#protocol" class="hover:text-aurum-accent transition-colors">Первый визит</a></li>
+                    <li><a href="#expertise" class="hover:text-aurum-accent transition-colors">Направления</a></li>
+                    <li><a href="#team" class="hover:text-aurum-accent transition-colors">Врачи</a></li>
+                    <li><a href="#cases" class="hover:text-aurum-accent transition-colors">До / После</a></li>
+                    <li><a href="#faq" class="hover:text-aurum-accent transition-colors">FAQ</a></li>
+                </ul>
+                <h4 class="text-xs uppercase tracking-widest text-aurum-accent mb-4">Социальные сети</h4>
+                <div class="flex gap-6 text-sm font-light text-stone-400">
+                    <a href="https://t.me/amfident" target="_blank" rel="noopener" class="hover:text-aurum-base transition-colors">Telegram</a>
+                    <a href="https://vk.com/amfident" target="_blank" rel="noopener" class="hover:text-aurum-base transition-colors">ВКонтакте</a>
+                    <a href="https://ok.ru/amfident" target="_blank" rel="noopener" class="hover:text-aurum-base transition-colors">Одноклассники</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row justify-between items-center gap-8">
+            <div class="text-xs font-light text-stone-500 text-center lg:text-left space-y-2">
+                <p>&copy; <span id="currentYear"></span> ООО «Амфи-Дент». Все права защищены. ИНН 2634076350, ОГРН 1072635016250.</p>
+                <p>Медицинская лицензия № ЛО-26-01-003058 от 15.03.2019 г., выдана Министерством здравоохранения Ставропольского края.</p>
+            </div>
+            
+            <div class="border border-stone-700 px-6 py-3 w-full lg:w-auto text-center">
+                <p class="text-[10px] sm:text-xs font-medium text-stone-400 uppercase tracking-[0.15em]">
+                    Имеются противопоказания. Необходима консультация специалиста.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vanilla JS Scripts -->
+    <script>
+        // 1. Initialize Icons & Year
+        lucide.createIcons();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // 2. Mobile Menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const openMenuBtn = document.getElementById('openMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('translate-x-full')) {
+                mobileMenu.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+                document.body.style.overflow = '';
+            }
+        }
+
+        openMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // 3. Phone Mask
+        const phoneInput = document.getElementById('phoneInput');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function (e) {
+                let val = e.target.value.replace(/\D/g, '');
+                if (val.length === 0) { e.target.value = ''; return; }
+                if (['7', '8', '9'].indexOf(val[0]) > -1) {
+                    if (val[0] === '9') val = '7' + val;
+                    let firstSymbols = '+7';
+                    let formattedValue = firstSymbols + ' ';
+                    if (val.length > 1) { formattedValue += '(' + val.substring(1, 4); }
+                    if (val.length >= 5) { formattedValue += ') ' + val.substring(4, 7); }
+                    if (val.length >= 8) { formattedValue += '-' + val.substring(7, 9); }
+                    if (val.length >= 10) { formattedValue += '-' + val.substring(9, 11); }
+                    e.target.value = formattedValue;
+                } else {
+                    e.target.value = '+' + val.substring(0, 15);
+                }
+            });
+        }
+
+        // 4. Accordions (Expertise & FAQ)
+        const allAccordionBtns = document.querySelectorAll('.accordion-btn, .faq-btn');
+        allAccordionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                const isFaq = this.classList.contains('faq-btn');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    content.style.opacity = '0';
+                    icon.style.transform = isFaq ? 'rotate(0deg)' : 'rotate(0deg)';
+                } else {
+                    const siblings = this.closest('section').querySelectorAll('.accordion-content');
+                    const siblingIcons = this.closest('section').querySelectorAll('.accordion-btn i, .faq-btn i');
+                    
+                    siblings.forEach(c => { c.style.maxHeight = null; c.style.opacity = '0'; });
+                    siblingIcons.forEach(i => { i.style.transform = 'rotate(0deg)'; });
+
+                    content.style.maxHeight = content.scrollHeight + 40 + 'px';
+                    content.style.opacity = '1';
+                    icon.style.transform = isFaq ? 'rotate(45deg)' : 'rotate(180deg)';
+                }
+            });
+        });
+
+        // 5. Before/After Slider
+        const sliderInput = document.getElementById('sliderInput');
+        const sliderAfter = document.getElementById('sliderAfter');
+        const sliderLine = document.getElementById('sliderLine');
+
+        if (sliderInput && sliderAfter && sliderLine) {
+            sliderInput.addEventListener('input', (e) => {
+                const value = e.target.value;
+                sliderAfter.style.clipPath = `polygon(0 0, ${value}% 0, ${value}% 100%, 0 100%)`;
+                sliderLine.style.left = `${value}%`;
+            });
+        }
+
+        // 6. Form Submission Simulation (TODO: connect to backend)
+        const bookingForm = document.getElementById('bookingForm');
+        const successMessage = document.getElementById('successMessage');
+
+        if (bookingForm) {
+            bookingForm.addEventListener('submit', (e) => {
+                e.preventDefault(); 
+                const submitBtn = bookingForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerText;
+                
+                submitBtn.innerText = 'Отправка...';
+                submitBtn.style.opacity = '0.7';
+
+                setTimeout(() => {
+                    successMessage.style.opacity = '1';
+                    successMessage.style.pointerEvents = 'auto';
+                    setTimeout(() => {
+                        bookingForm.reset();
+                        submitBtn.innerText = originalText;
+                        submitBtn.style.opacity = '1';
+                    }, 500);
+                    setTimeout(() => {
+                        successMessage.style.opacity = '0';
+                        successMessage.style.pointerEvents = 'none';
+                    }, 6000);
+                }, 1500); 
+            });
+        }
+
+        // 7. Navbar Scroll Effect
+        const navbar = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+                navbar.style.backgroundColor = 'rgba(251, 251, 249, 0.98)';
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.style.backgroundColor = 'rgba(251, 251, 249, 0.9)';
+            }
+        });
+
+        // 8. Doctors Modals Logic (9 Experts mapping)
+        const doctorsData = {
+            barsukov: {
+                name: "Барсуков Павел Валентинович",
+                role: "Ведущий хирург-имплантолог",
+                exp: "Стаж 29 лет",
+                desc: "<div class='mb-4'><strong class='text-stone-900'>Образование и ординатура:</strong> Фундаментальное медицинское образование и специализация по челюстно-лицевой хирургии.</div><div class='mb-4'><strong class='text-stone-900'>Международная сертификация:</strong> Стажировки по сложной аугментации и имплантологическим протоколам Nobel Biocare (Швейцария), Alpha-Bio Tec.</div><div><strong class='text-stone-900'>Клинический фокус:</strong> Владеет передовыми методиками атравматичной хирургии с использованием ультразвукового пьезотома KaVo. Направленная костная регенерация, синус-лифтинг и имплантация без отеков.</div>"
+            },
+            ilnitsky: {
+                name: "Ильницкий Евгений Викторович",
+                role: "Стоматолог-терапевт высшей категории",
+                exp: "Ювелирная эндодонтия",
+                desc: "<div class='mb-4'><strong class='text-stone-900'>Образование и ординатура:</strong> Высшее медицинское образование, присвоена высшая квалификационная категория по терапевтической стоматологии.</div><div class='mb-4'><strong class='text-stone-900'>Международная сертификация:</strong> Сертифицированный специалист по микроинвазивной эндодонтии и эстетической реставрации.</div><div><strong class='text-stone-900'>Клинический фокус:</strong> Лечение сложных и искривленных корневых каналов под оптическим увеличением. Микроинвазивная художественная реставрация. Спасение «безнадежных» зубов.</div>"
+            },
+            silitskaya: {
+                name: "Силицкая Вероника Александровна",
+                role: "Стоматолог-терапевт",
+                exp: "Художественная реставрация",
+                desc: "<div class='mb-4'><strong class='text-stone-900'>Образование и ординатура:</strong> Специализация в терапевтической стоматологии и эстетической реставрации.</div><div class='mb-4'><strong class='text-stone-900'>Международная сертификация:</strong> Участник продвинутых курсов по прямой реставрации композитными материалами и эндодонтии.</div><div><strong class='text-stone-900'>Клинический фокус:</strong> Работа с премиальными композитными материалами. Восстановление природной анатомии зуба. Создание долговечных реставраций, неотличимых от родной эмали.</div>"
+            },
+            tsokolova: {
+                name: "Цоколова Лариса Анатольевна",
+                role: "Стоматолог-хирург, детский стоматолог",
+                exp: "Стаж 36 лет",
+                desc: "<div class='mb-4'><strong class='text-stone-900'>Образование и ординатура:</strong> Классическая медицинская школа, огромный опыт в детской и взрослой амбулаторной хирургии.</div><div class='mb-4'><strong class='text-stone-900'>Международная сертификация:</strong> Регулярное подтверждение квалификации по хирургическим стандартам и протоколам адаптации детей.</div><div><strong class='text-stone-900'>Клинический фокус:</strong> Легендарный клинический опыт. Бережная хирургия и деликатный детский прием, исключающий психологическую травму.</div>"
+            },
+            sokolov: {
+                name: "Соколов Алексей Юрьевич",
+                role: "Стоматолог-терапевт",
+                exp: "Стаж более 30 лет",
+                desc: "<div class='mb-4'><strong class='text-stone-900'>Образование и ординатура:</strong> Фундаментальное профильное образование с многолетним стажем работы в сложных клинических условиях.</div><div class='mb-4'><strong class='text-stone-900'>Международная сертификация:</strong> Постоянное совершенствование в терапевтических протоколах сохранения зубов.</div><div><strong class='text-stone-900'>Клинический фокус:</strong> Комплексный подход к диагностике и лечению кариеса, пульпита и периодонтита с опорой на многолетнюю практику. Владеет классическими и цифровыми протоколами.</div>"
+            },
+            borzov: {
+                name: "Борзов Илья Юрьевич",
+                role: "Врач-стоматолог-ортодонт",
+                exp: "Стаж с 2011 года",
+                desc: "<div class='mb-4'><strong class='text-stone-900'>Образование и ординатура:</strong> Комплексная специализация по ортодонтии и ортопедии.</div><div class='mb-4'><strong class='text-stone-900'>Международная сертификация:</strong> Сертификация по работе с элайнерами и лингвальными брекет-системами STB.</div><div><strong class='text-stone-900'>Клинический фокус:</strong> Цифровое планирование ортодонтического лечения. Исправление прикуса любой сложности. Работа с элайнерами и лингвальными брекетами для создания идеальной улыбки.</div>"
+            },
+            popova: {
+                name: "Попова Ирина Васильевна",
+                role: "Стоматолог-терапевт",
+                exp: "Микроинвазивная терапия",
+                desc: "<div class='mb-4'><strong class='text-stone-900'>Образование и ординатура:</strong> Высшее медицинское образование, специализация на терапевтическом приеме.</div><div class='mb-4'><strong class='text-stone-900'>Международная сертификация:</strong> Обучение по работе с лазерными и озоновыми протоколами диагностики и лечения.</div><div><strong class='text-stone-900'>Клинический фокус:</strong> Лазерная и озоновая диагностика. Микроинвазивная терапия с максимальным сохранением собственных живых тканей зуба. Чуткий подход к каждому пациенту.</div>"
+            },
+            makatova: {
+                name: "Макатова Жанна Сейфединовна",
+                role: "Стоматолог-терапевт",
+                exp: "Превентивная терапия",
+                desc: "<div class='mb-4'><strong class='text-stone-900'>Образование и ординатура:</strong> Профильное образование в области терапевтической стоматологии.</div><div class='mb-4'><strong class='text-stone-900'>Международная сертификация:</strong> Программы повышения квалификации по эстетической и микроинвазивной терапии.</div><div><strong class='text-stone-900'>Клинический фокус:</strong> Превентивная терапия и диагностика скрытого кариеса. Лечение проходит с соблюдением высших стандартов безопасности и комфорта.</div>"
+            },
+            kalashnikova: {
+                name: "Калашникова Наталья Ивановна",
+                role: "Врач-стоматолог детский",
+                exp: "Детский прием",
+                desc: "<div class='mb-4'><strong class='text-stone-900'>Образование и ординатура:</strong> Высшее стоматологическое образование, специализация в области детской стоматологии.</div><div class='mb-4'><strong class='text-stone-900'>Международная сертификация:</strong> Современные протоколы профилактики и лечения зубов у детей.</div><div><strong class='text-stone-900'>Клинический фокус:</strong> Адаптационный прием без стресса. Лечение кариеса, профилактика очаговой деминерализации, герметизация фиссур. Формирование позитивного отношения к лечению с малых лет.</div>"
+            }
+        };
+
+        const modalOverlay = document.getElementById('doctorModal');
+        const closeDocModalBtn = document.getElementById('closeDoctorModal');
+        const docCards = document.querySelectorAll('[data-modal-target]');
+
+        const mName = document.getElementById('modalDocName');
+        const mRole = document.getElementById('modalDocRole');
+        const mExp = document.getElementById('modalDocExp');
+        const mDesc = document.getElementById('modalDocDesc');
+
+        function openDocModal(docId) {
+            const data = doctorsData[docId];
+            if(!data) return;
+            mName.innerHTML = data.name;
+            mRole.innerHTML = data.role;
+            mExp.innerHTML = data.exp;
+            mDesc.innerHTML = data.desc;
+            
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeDocModal = function() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        docCards.forEach(card => {
+            card.addEventListener('click', () => {
+                openDocModal(card.getAttribute('data-modal-target'));
+            });
+        });
+
+        closeDocModalBtn.addEventListener('click', window.closeDocModal);
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                window.closeDocModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                window.closeDocModal();
+            }
+        });
+    </script>
+</body>
+</html>
